@@ -1,0 +1,37 @@
+﻿@model KeyVaultAzure.Models.KeyVaultModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Read Secrets from Azure Key Vault</legend>
+        <legend>Net Core 3.1 & Azure</legend>
+        <img src="~/images/kaizen-force.png" />
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+
+    </fieldset>
+    <table>
+        <tr>
+            <td>@Html.Label("Connection String")</td>
+            <td>@Html.TextBoxFor(a => a.ConnectionStringKeyVault, new { @Value = Model.ConnectionStringKeyVault })</td>
+            <td>@Html.ValidationMessageFor(a => a.ConnectionStringKeyVault)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Token Key")</td>
+            <td>@Html.TextBoxFor(a => a.TokenKeyVault, new { @Value = Model.TokenKeyVault })</td>
+            <td>@Html.ValidationMessageFor(a => a.TokenKeyVault)</td>
+        </tr>
+    </table>
+
+}  
